@@ -85,8 +85,7 @@ Le dataset est constitué des fichiers sources de la documentation officielle de
 ```bash
 pip install -r requirements.txt
 
-### Lancement Démo
-```bash
+Démo
 python -m src.main
 python -m src.eval
 python -m src.eval_systematic
