@@ -1,0 +1,113 @@
+{
+  "summary": {
+    "n": 3,
+    "avg": {
+      "baseline": {
+        "rougeL_f1": 0.10652440173355944,
+        "bleu": 0.8802012231654177
+      },
+      "rag": {
+        "rougeL_f1": 0.1229951183861178,
+        "bleu": 2.380267472912022
+      },
+      "iterative": {
+        "rougeL_f1": 0.11636074759370957,
+        "bleu": 2.4745395415669282
+      }
+    }
+  },
+  "failures_iterative_by_rougeL": [
+    {
+      "id": "validation_1",
+      "question": "Comment valider un formulaire avec Validator ?",
+      "rougeL_f1": 0.1092150170648464,
+      "bleu": 1.420090818844928
+    },
+    {
+      "id": "security_1",
+      "question": "Comment sécuriser une page avec Symfony Security ?",
+      "rougeL_f1": 0.11949685534591192,
+      "bleu": 2.9383830224343708
+    },
+    {
+      "id": "routing_1",
+      "question": "Comment définir une route simple dans Symfony ?",
+      "rougeL_f1": 0.12037037037037036,
+      "bleu": 3.065144783421486
+    }
+  ],
+  "results": [
+    {
+      "id": "routing_1",
+      "question": "Comment définir une route simple dans Symfony ?",
+      "reference": "On peut définir une route via des attributs/annotations sur un contrôleur, ou via un fichier de configuration (YAML/XML/PHP). Exemple: #[Route('/', name: 'homepage')].",
+      "answers": {
+        "baseline": "Pour définir une route simple dans Symfony, vous devez créer un fichier de route dans le dossier `routes` de votre application. Par exemple, si vous avez un fichier `routes.yaml` dans le dossier `config` de votre application, vous pouvez y ajouter la définition suivante :\n\n```yaml\nroutes:\n  app_homepage:\n    path: /\n    controller: App\\Controller\\DefaultController::index\n```\n\nDans cet exemple, la route `app_homepage` est définie pour la racine de l'application (`/`) et est associée au contrôleur `DefaultController` de l'application, avec la méthode `index`.\n\nVous pouvez également utiliser l'annotation pour définir les routes. Pour cela, vous devez ajouter l'annotation `@Route` à la méthode du contrôleur qui traite la requête. Par exemple :\n\n```php\n// src/Controller/DefaultController.php\n\nnamespace App\\Controller;\n\nuse Symfony\\Component\\HttpFoundation\\Response;\nuse Symfony\\Component\\Routing\\Annotation\\Route;\n\nclass DefaultController\n{\n    /**\n     * @Route(\"/\", name=\"app_homepage\")\n     */\n    public function index()\n    {\n        return new Response(\"Bonjour !\");\n    }\n}\n```\n\nDans cet exemple, la route `app_homepage` est définie pour la racine de l'application (`/`) et est associée à la méthode `index` du contrôleur `DefaultController`.",
+        "rag": "Pour définir une route simple dans Symfony, vous pouvez utiliser l'attribut `#[Route]` sur votre méthode de contrôleur. Voici un exemple :\n\n```php\n// src/Controller/MainController.php\n\nnamespace App\\Controller;\n\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;\nuse Symfony\\Component\\HttpFoundation\\Response;\nuse Symfony\\Component\\Routing\\Attribute\\Route;\n\nclass MainController extends AbstractController\n{\n    #[Route('/hello')]\n    public function hello(): Response\n    {\n        return new Response('Bonjour !');\n    }\n}\n```\n\nDans cet exemple, la route `/hello` est définie pour appeler la méthode `hello` du contrôleur `MainController`. La méthode `hello` retourne une réponse avec le message \"Bonjour !\".\n\nVous pouvez également spécifier un nom pour la route en utilisant l'option `name` :\n\n```php\n#[Route('/hello', name: 'hello')]\n```\n\nCela vous permettra de référencer la route par son nom dans votre code, par exemple pour générer un lien vers cette route.",
+        "iterative": "Pour définir une route simple dans Symfony, vous pouvez utiliser l'attribut `#[Route]` sur la méthode de votre contrôleur. Voici un exemple :\n\n```php\n// src/Controller/DefaultController.php\n\nnamespace App\\Controller;\n\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;\nuse Symfony\\Component\\HttpFoundation\\Response;\nuse Symfony\\Component\\Routing\\Attribute\\Route;\n\nclass DefaultController extends AbstractController\n{\n    #[Route('/blog', name: 'blog')]\n    public function blog(): Response\n    {\n        // ...\n    }\n}\n```\n\nDans ce cas, la route `/blog` sera associée à la méthode `blog()` du contrôleur `DefaultController`. La valeur `name: 'blog'` définit le nom de la route, qui peut être utilisé pour générer des liens vers cette route.\n\nVous pouvez également spécifier des paramètres de route en utilisant des accolades `{}` :\n\n```php\n// src/Controller/DefaultController.php\n\nnamespace App\\Controller;\n\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;\nuse Symfony\\Component\\HttpFoundation\\Response;\nuse Symfony\\Component\\Routing\\Attribute\\Route;\n\nclass DefaultController extends AbstractController\n{\n    #[Route('/blog/{id}', name: 'blog')]\n    public function blog(int $id): Response\n    {\n        // ...\n    }\n}\n```\n\nDans ce cas, la route `/blog/{id}` sera associée à la méthode `blog()` du contrôleur `DefaultController`, où `{id}` est un paramètre de route qui sera passé à la méthode."
+      },
+      "metrics": {
+        "baseline": {
+          "rougeL_f1": 0.125,
+          "bleu": 1.2528498860012005
+        },
+        "rag": {
+          "rougeL_f1": 0.155688622754491,
+          "bleu": 4.000043391705485
+        },
+        "iterative": {
+          "rougeL_f1": 0.12037037037037036,
+          "bleu": 3.065144783421486
+        }
+      }
+    },
+    {
+      "id": "security_1",
+      "question": "Comment sécuriser une page avec Symfony Security ?",
+      "reference": "On sécurise une page en configurant security.yaml (firewalls, access_control) et/ou en utilisant des attributs comme #[IsGranted('ROLE_ADMIN')] sur un contrôleur. Les rôles déterminent l'accès.",
+      "answers": {
+        "baseline": "Pour sécuriser une page avec Symfony Security, vous devez suivre les étapes suivantes :\n\n1. **Configurer l'authentification** : Vous devez configurer l'authentification pour définir comment les utilisateurs se connectent à votre application. Vous pouvez utiliser des méthodes d'authentification telles que la connexion par mot de passe, l'authentification OAuth, etc.\n\nDans votre fichier `config/security.yaml`, ajoutez les lignes suivantes :\n```yaml\nsecurity:\n    # ...\n    firewalls:\n        # ...\n        login:\n            pattern: ^/login$\n            anonymous: true\n            json_login:\n                check_path: /login\n    # ...\n```\n2. **Définir les rôles** : Vous devez définir les rôles qui seront utilisés pour autoriser ou interdire l'accès à certaines pages.\n\nDans votre fichier `config/security.yaml`, ajoutez les lignes suivantes :\n```yaml\nsecurity:\n    # ...\n    access_control:\n        - { path: ^/admin, roles: ROLE_ADMIN }\n        - { path: ^/public, roles: IS_AUTHENTICATED_ANONYMOUSLY }\n```\n3. **Créer un contrôleur de sécurité** : Vous devez créer un contrôleur qui gérera l'authentification et l'autorisation.\n\nCréez un nouveau contrôleur dans votre espace de nom `App\\Controller\\SecurityController.php` :\n```php\n// src/Controller/SecurityController.php\n\nnamespace App\\Controller;\n\nuse Symfony\\Component\\HttpFoundation\\Request;\nuse Symfony\\Component\\HttpFoundation\\Response;\nuse Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface;\nuse Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManager;\nuse Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface;\nuse Symfony\\Component\\Security\\Core\\Security;\n\nclass SecurityController extends Controller\n{\n    public function login(Request $request)\n    {\n        // Gérez la connexion\n        $token = $this->get('security.token_storage')->getToken();\n        if ($token) {\n            // L'utilisateur est déjà connecté\n            return $this->redirectToRoute('home');\n        }\n\n        // Affichez le formulaire de connexion\n        return $this->render('security/login.html.twig');\n    }\n\n    public function logout()\n    {\n        // Gérez la déconnexion\n        $this->get('security.token_storage')->set",
+        "rag": "Pour sécuriser une page avec Symfony Security, vous pouvez utiliser l'une des méthodes suivantes :\n\n1. **Définir un rôle** : vous pouvez définir un rôle spécifique pour la page que vous souhaitez sécuriser. Par exemple, si vous souhaitez que seuls les utilisateurs ayant le rôle `ROLE_ADMIN` puissent accéder à la page, vous pouvez ajouter la ligne suivante à votre fichier de configuration de sécurité (`security.yaml` ou `security.xml`) :\n\n```yaml\n# config/packages/security.yaml\nsecurity:\n    # ...\n    access_control:\n        - { path: '^/admin', roles: 'ROLE_ADMIN' }\n```\n\n2. **Utiliser l'attribut `@Security`** : vous pouvez utiliser l'attribut `@Security` sur votre contrôleur pour spécifier les rôles nécessaires pour accéder à la page. Par exemple :\n\n```php\n// src/Controller/AdminController.php\nuse Symfony\\Component\\Security\\Http\\Attribute\\IsGranted;\n\n#[IsGranted('ROLE_ADMIN')]\nclass AdminController extends AbstractController\n{\n    // ...\n}\n```\n\n3. **Définir une règle d'accès** : vous pouvez définir une règle d'accès spécifique pour la page que vous souhaitez sécuriser. Par exemple, si vous souhaitez que seuls les utilisateurs ayant le rôle `ROLE_ADMIN` ou étant connectés puissent accéder à la page, vous pouvez ajouter la ligne suivante à votre fichier de configuration de sécurité (`security.yaml` ou `security.xml`) :\n\n```yaml\n# config/packages/security.yaml\nsecurity:\n    # ...\n    access_control:\n        - { path: '^/admin', roles: ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'] }\n```\n\n4. **Utiliser l'attribut `@IsGranted`** : vous pouvez utiliser l'attribut `@IsGranted` sur votre méthode de contrôleur pour spécifier les rôles nécessaires pour accéder à la page. Par exemple :\n\n```php\n// src/Controller/AdminController.php\nuse Symfony\\Component\\Security\\Http\\Attribute\\IsGranted;\n\nclass AdminController extends AbstractController\n{\n    #[IsGranted('ROLE_ADMIN')]\n    public function adminDashboard(): Response\n    {\n        // ...\n    }\n}\n```\n\nCes méthodes vous permettent de sécuriser vos pages",
+        "iterative": "Pour sécuriser une page avec Symfony Security, vous pouvez utiliser plusieurs méthodes :\n\n1. **Définir des règles d'accès** : vous pouvez définir des règles d'accès dans le fichier `security.yaml` ou `security.xml` pour spécifier les rôles nécessaires pour accéder à une page ou une partie de votre application. Par exemple, vous pouvez définir une règle pour que les utilisateurs aient besoin du rôle `ROLE_ADMIN` pour accéder à la page `/admin`.\n\n```yaml\n# config/packages/security.yaml\nsecurity:\n    access_control:\n        - { path: ^/admin, roles: ROLE_ADMIN }\n```\n\n2. **Utiliser l'attribut `@IsGranted`** : vous pouvez utiliser l'attribut `@IsGranted` pour spécifier les rôles nécessaires pour accéder à une méthode ou une action dans votre contrôleur. Par exemple, vous pouvez utiliser l'attribut pour spécifier que la méthode `adminDashboard` nécessite le rôle `ROLE_SUPER_ADMIN`.\n\n```php\n// src/Controller/AdminController.php\nuse Symfony\\Component\\Security\\Http\\Attribute\\IsGranted;\n\n#[IsGranted('ROLE_SUPER_ADMIN')]\npublic function adminDashboard(): Response\n{\n    // ...\n}\n```\n\n3. **Utiliser le service `AuthorizationCheckerInterface`** : vous pouvez utiliser le service `AuthorizationCheckerInterface` pour vérifier si un utilisateur a un rôle spécifique. Par exemple, vous pouvez utiliser le service pour vérifier si l'utilisateur a le rôle `ROLE_ADMIN` avant de lui permettre d'accéder à la page `/admin`.\n\n```php\n// src/Controller/AdminController.php\nuse Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationCheckerInterface;\n\npublic function adminDashboard(AuthorizationCheckerInterface $authorizationChecker): Response\n{\n    if (!$authorizationChecker->isGranted('ROLE_ADMIN')) {\n        // ...\n    }\n    // ...\n}\n```\n\n4. **Utiliser les règles de sécurité dans les routes** : vous pouvez utiliser les règles de sécurité pour spécifier les rôles nécessaires pour accéder à une route. Par exemple,"
+      },
+      "metrics": {
+        "baseline": {
+          "rougeL_f1": 0.10491803278688525,
+          "bleu": 0.7879888124816782
+        },
+        "rag": {
+          "rougeL_f1": 0.13455657492354742,
+          "bleu": 2.6514919909859413
+        },
+        "iterative": {
+          "rougeL_f1": 0.11949685534591192,
+          "bleu": 2.9383830224343708
+        }
+      }
+    },
+    {
+      "id": "validation_1",
+      "question": "Comment valider un formulaire avec Validator ?",
+      "reference": "On valide des données avec le Validator en utilisant des contraintes (Assert\\NotBlank, Assert\\Email, etc.) définies sur les propriétés (attributs/annotations) ou via YAML/XML, puis en appelant le validateur.",
+      "answers": {
+        "baseline": "Pour valider un formulaire avec le composant Validator de Symfony, vous devez suivre ces étapes :\n\n1. **Créer un formulaire** : Créez un formulaire avec la classe `FormBuilder`. Vous pouvez utiliser la méthode `createFormBuilder()` pour créer un formulaire.\n2. **Ajouter des contraintes** : Ajoutez des contraintes à vos champs de formulaire pour spécifier les règles de validation. Les contraintes les plus courantes sont `NotBlank`, `Length`, `Email`, `Regex`, etc.\n3. **Valider le formulaire** : Appelez la méthode `isValid()` sur votre formulaire pour vérifier si les données sont valides.\n\nVoici un exemple de code pour valider un formulaire avec le composant Validator :\n\n```php\n// src/Form/RegistrationType.php\n\nnamespace App\\Form;\n\nuse Symfony\\Component\\Form\\AbstractType;\nuse Symfony\\Component\\Form\\FormBuilderInterface;\nuse Symfony\\Component\\OptionsResolver\\OptionsResolver;\nuse Symfony\\Component\\Validator\\Constraints\\Email;\nuse Symfony\\Component\\Validator\\Constraints\\Length;\nuse Symfony\\Component\\Validator\\Constraints\\NotBlank;\n\nclass RegistrationType extends AbstractType\n{\n    public function buildForm(FormBuilderInterface $builder, array $options)\n    {\n        $builder\n            ->add('email', Email::class, [\n                'constraints' => [\n                    new Email(),\n                    new NotBlank(),\n                ],\n            ])\n            ->add('password', PasswordType::class, [\n                'constraints' => [\n                    new Length(['min' => 8]),\n                    new NotBlank(),\n                ],\n            ])\n            ->add('confirm_password', PasswordType::class, [\n                'constraints' => [\n                    new NotBlank(),\n                ],\n            ])\n        ;\n    }\n\n    public function configureOptions(OptionsResolver $resolver)\n    {\n        // ...\n    }\n}\n```\n\n```php\n// src/Controller/RegistrationController.php\n\nnamespace App\\Controller;\n\nuse App\\Form\\RegistrationType;\nuse Symfony\\Component\\HttpFoundation\\Request;\nuse Symfony\\Component\\HttpFoundation\\Response;\nuse Symfony\\Component\\Validator\\ValidatorInterface;\n\nclass RegistrationController extends Controller\n{\n    public function register(Request $request, ValidatorInterface $validator)\n    {\n        $form = $this->createForm(RegistrationType::class);\n        $form->handleRequest($request);\n\n        if ($form->isSubmitted() && $form->isValid()) {\n            // Les données sont valides, vous pouvez les traiter ici\n            $data = $form->getData();\n            // ...\n        } else {\n           ",
+        "rag": "Pour valider un formulaire avec Validator, vous devez suivre les étapes suivantes :\n\n1. Installez le composant Validator en exécutant la commande `composer require symfony/validator` si vous utilisez Symfony Flex, ou configurez manuellement la validation si vous ne l'utilisez pas.\n2. Créez un objet de formulaire qui contient les données à valider.\n3. Instanciez le service Validator et appelez la méthode `validate()` pour valider l'objet de formulaire.\n4. Si la validation échoue, le service Validator retourne une liste de contraintes violées.\n5. Vous pouvez alors afficher les erreurs de validation en utilisant la méthode `__toString()` de la liste de contraintes violées.\n\nVoici un exemple de code qui illustre ces étapes :\n```php\nuse Symfony\\Component\\Validator\\Validator\\ValidatorInterface;\nuse App\\Entity\\Author;\n\npublic function author(ValidatorInterface $validator): Response\n{\n    $author = new Author();\n    $author->setName('');\n    $author->setGenre('invalid');\n\n    $errors = $validator->validate($author);\n\n    if (count($errors) > 0) {\n        $errorsString = (string) $errors;\n        return new Response($errorsString);\n    }\n\n    return new Response('The author is valid!');\n}\n```\nDans cet exemple, nous créons un objet `Author` avec un nom vide et un genre invalide. Nous appelons ensuite la méthode `validate()` du service Validator pour valider l'objet. Si la validation échoue, nous affichons les erreurs de validation en utilisant la méthode `__toString()` de la liste de contraintes violées.",
+        "iterative": "Pour valider un formulaire avec Validator, vous devez suivre les étapes suivantes :\n\n1. Installez le composant Validator en exécutant la commande `composer require symfony/validator` si vous utilisez Symfony Flex.\n2. Créez un objet de formulaire qui contient les données à valider.\n3. Configurez les contraintes de validation pour les propriétés de l'objet de formulaire. Vous pouvez utiliser les annotations de validation (`@Assert\\NotBlank`, `@Assert\\Length`, etc.) ou les fichiers de configuration de validation (.yaml ou .xml) dans le répertoire `config/validator/`.\n4. Utilisez le service Validator pour valider l'objet de formulaire. Vous pouvez utiliser la méthode `validate()` pour obtenir une liste d'erreurs si la validation échoue.\n\nVoici un exemple de code qui illustre ces étapes :\n\n```php\nuse Symfony\\Component\\Validator\\Validator\\ValidatorInterface;\nuse App\\Entity\\Author;\n\npublic function author(ValidatorInterface $validator): Response\n{\n    $author = new Author();\n    // Configurez les contraintes de validation pour l'objet Author\n    $author->setName('John Doe');\n    $author->setEmail('john.doe@example.com');\n\n    $errors = $validator->validate($author);\n\n    if (count($errors) > 0) {\n        // Si la validation échoue, affichez les erreurs\n        $errorsString = (string) $errors;\n        return new Response($errorsString);\n    }\n\n    // Si la validation réussit, affichez un message de succès\n    return new Response('L\\'auteur est valide !');\n}\n```\n\nDans cet exemple, nous créons un objet `Author` et configurons les contraintes de validation pour les propriétés `name` et `email`. Nous utilisons ensuite le service Validator pour valider l'objet `Author`. Si la validation échoue, nous affichons les erreurs. Si la validation réussit, nous affichons un message de succès."
+      },
+      "metrics": {
+        "baseline": {
+          "rougeL_f1": 0.0896551724137931,
+          "bleu": 0.5997649710133743
+        },
+        "rag": {
+          "rougeL_f1": 0.07874015748031496,
+          "bleu": 0.4892670360446401
+        },
+        "iterative": {
+          "rougeL_f1": 0.1092150170648464,
+          "bleu": 1.420090818844928
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+requests
+os
+json
+sentence-transformers 
+faiss-cpu 
+groq 
+rank_bm25 
+numpy
+python-dotenv
+tqdm
+scikit-learn
+dataclasses
+typing
+sacrebleu
+rouge_score
+glob
+re
