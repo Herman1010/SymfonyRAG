@@ -82,10 +82,17 @@ Le dataset est constitué des fichiers sources de la documentation officielle de
 - Clé API Groq
 
 ### Installation
+Clônez le répo et à la racine créez un fichier .env et mettez cette ligne
+```bash
+GROQ_API_KEY="Ma clé GROQ"
+```
 ```bash
 pip install -r requirements.txt
+```
 
-Démo
+### Démo
+```bash
 python -m src.main
 python -m src.eval
 python -m src.eval_systematic
+```
